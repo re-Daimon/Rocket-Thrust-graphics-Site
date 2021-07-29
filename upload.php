@@ -15,13 +15,15 @@ if( isset( $_POST['my_file_upload'] ) ){
         }
     }
 
+    $cout = 1;
     foreach( $files as $file ){
 
         $file_name = $file['name'];
         $result_file = file($file_name);
 
 
-        array_push($open,'{ name: \'Test\'' . ', data: ' . '[' . implode("",$result_file) . ']},');
+        array_push($open,'{ name: \'Test' . $cout . '\'' . ', data: ' . '[' . implode("",$result_file) . ']},');
+        $cout++;
 
 
         }
