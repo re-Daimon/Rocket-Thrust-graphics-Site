@@ -5,21 +5,21 @@ if( isset( $_POST['my_file_upload'] ) ){
     $files      = $_FILES; // полученные файлы
     $done_files = array();
 
-    $open = [];
+    $open = []; //массив данных
 
     foreach( $files as $file ){
         $file_name = $file['name'];
 
-        if( move_uploaded_file( $file['tmp_name'], "$file_name" ) ){
+        if( move_uploaded_file( $file['tmp_name'], "$file_name" ) ){ // загружаем файлы
             $done_files[] = realpath( "$file_name" );
         }
     }
 
-    $cout = 1;
+    $cout = 1; //счетчик файлов
     foreach( $files as $file ){
 
         $file_name = $file['name'];
-        $result_file = file($file_name);
+        $result_file = file($file_name); // получаем данные
 
 
         array_push($open,'{ name: \'Test' . $cout . '\'' . ', data: ' . '[' . implode("",$result_file) . ']},');
@@ -27,7 +27,7 @@ if( isset( $_POST['my_file_upload'] ) ){
 
 
         }
-
+    // изменяем js файл
     file_put_contents('result.js', 'document.addEventListener(\'DOMContentLoaded\', function () {
         Highcharts.chart(\'container\', {
             chart: {
